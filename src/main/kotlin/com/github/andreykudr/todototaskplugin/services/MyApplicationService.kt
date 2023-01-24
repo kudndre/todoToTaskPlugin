@@ -1,6 +1,6 @@
-package org.jetbrains.plugins.template.services
+package com.github.andreykudr.todototaskplugin.services
 
-import org.jetbrains.plugins.template.MyBundle
+import com.github.andreykudr.todototaskplugin.MyBundle
 
 class MyApplicationService {
 
