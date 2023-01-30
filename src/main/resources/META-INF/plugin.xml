@@ -1,18 +1,23 @@
-<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.andreykudr.todototaskplugin</id>
-    <name>IntelliJ Platform Plugin todoToTaskPlugin</name>
+    <name>TODO to Task</name>
     <vendor>andrey-kudr</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.andreykudr.todototaskplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.andreykudr.todototaskplugin.services.MyProjectService"/>
+        <intentionAction>
+            <className>com.github.andreykudr.todototaskplugin.intention.CreateTaskFromTodoIntentionAction</className>
+            <category>Other</category>
+        </intentionAction>
+        <projectConfigurable
+                parentId="tools"
+                instance="com.github.andreykudr.todototaskplugin.configuration.ProjectSettingsConfigurable"
+                id="com.github.andreykudr.todototaskplugin.configuration.ProjectSettingsConfigurable"
+                displayName="Todo to Task"
+                nonDefaultProject="false"/>
+        <applicationService serviceImplementation="com.github.andreykudr.todototaskplugin.service.SettingsState"/>
+        <applicationService serviceInterface="com.github.andreykudr.todototaskplugin.service.task.TaskCreator"
+                            serviceImplementation="com.github.andreykudr.todototaskplugin.service.task.AsanaTaskCreator"/>
     </extensions>
-
-    <applicationListeners>
-        <listener class="com.github.andreykudr.todototaskplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
 </idea-plugin>
